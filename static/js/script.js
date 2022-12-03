@@ -1,5 +1,4 @@
 // some scripts
-
 // jquery ready start
 $(document).ready(function () {
     // jQuery code
@@ -55,6 +54,6 @@ $(document).ready(function () {
 // jquery end
 
 
-setTimeout(function () {
+window.setTimeout(function () {
     $('#message').fadeOut('slow')
 }, 4000)
