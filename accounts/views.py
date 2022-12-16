@@ -15,6 +15,8 @@ from carts.models import Cart, CartItem
 from carts.views import _cart_id
 import requests
 
+from orders.models import Order
+
 
 def register(request):
     if request.method == 'POST':
@@ -106,9 +108,9 @@ def login(request):
                 query = requests.utils.urlparse(url).query
 
                 # nest=/cart/checkout/
-                params = dict(x.split('=')for x in query.split('&'))
+                params = dict(x.split('=') for x in query.split('&'))
                 if 'next' in params:
-                    next_page= params['next']
+                    next_page = params['next']
                     return redirect(next_page)
             except:
                 return redirect('dashboard')
@@ -144,7 +146,12 @@ def activate(request, uidb64, token):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+    orders_count = orders.count()
+    context = {
+        'orders_count': orders_count,
+    }
+    return render(request, 'accounts/dashboard.html', context)
 
 
 def forgot_password(request):
@@ -189,6 +196,7 @@ def resetpassword_validate(request, uidb64, token):
         messages.error(request, 'This link has been expired!')
         return redirect('login')
 
+
 def reset_password(request):
     if request.method == 'POST':
         password = request.POST['password']
@@ -207,3 +215,11 @@ def reset_password(request):
             return redirect('reset_password')
     else:
         return render(request, 'accounts/reset_password.html')
+
+
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+    context = {
+        'orders': orders,
+    }
+    return render(request, 'accounts/my_orders.html', context)
