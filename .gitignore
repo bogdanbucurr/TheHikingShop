@@ -1,0 +1,15 @@
+.env
+db.sqlite3
+db.sqlite3-journal
+*.log
+*.pot
+*.pyc
+__pycache--/
+local_settings.py
+var/
+eggs/
+.eggs/
+lib/
+downloads/
+lib64/
+wheels/

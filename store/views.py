@@ -7,7 +7,7 @@ from carts.models import CartItem
 from carts.views import _cart_id
 from orders.models import OrderProduct
 from .forms import ReviewForm
-from .models import Product, ReviewRating
+from .models import Product, ReviewRating, ProductGallery
 from category.models import Category
 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -56,11 +56,14 @@ def product_detail(request, category_slug, product_slug):
     # Get the reviews
     reviews = ReviewRating.objects.filter(product_id=single_product.id, status=True)
 
+    product_gallery = ProductGallery.objects.filter(product_id=single_product.id)
+
     context = {
         'single_product': single_product,
         'in_cart': in_cart,
         'order_product': order_product,
         'reviews': reviews,
+        'product_gallery': product_gallery,
     }
     return render(request, 'store/product_detail.html', context)
 
