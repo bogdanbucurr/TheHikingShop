@@ -296,3 +296,11 @@ def order_detail(request, order_id):
 
     }
     return render(request, 'accounts/order_detail.html', context)
+
+
+def call_us(request):
+    return render(request, 'accounts/call_us.html')
+
+
+def email_us(request):
+    return render(request, 'accounts/email_us.html')

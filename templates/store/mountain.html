@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <div class="container" style="margin-top: 50px;">
+        <h5 class="text-center">Please click the below button for all of the mountain trails from Romania</h5>
+        <br>
+        <div class="text-center">
+            <a href="https://muntii-nostri.ro/ro/trasee" class="btn btn-success">The Trails</a>
+        </div>
+    </div>
+
+    <div class="container"
+         style="margin: 0 auto;width: 50%;padding: 50px;;margin-top: 50px;margin-bottom: 50px;">
+        <div class="row align-items-center">
+            <div class="col-lg-2 col-md-3 col-6">
+
+
+                <img class="logo" src="{% static '/images/mountain.png' %}">
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
