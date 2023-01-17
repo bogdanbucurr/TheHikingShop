@@ -70,6 +70,7 @@ def product_detail(request, category_slug, product_slug):
 
 def search(request):
     products = 0
+    product_count = 0
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
@@ -103,3 +104,5 @@ def submit_review(request, product_id):
                 data.product_id = product_id
                 data.user_id = request.user.id
                 data.save()
+                messages.success(request, 'Thank you! Your review has been submitted.')
+                return redirect(url)

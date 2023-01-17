@@ -59,7 +59,7 @@ def payments(request):
     CartItem.objects.filter(user=request.user).delete()
 
     # Send order received email to customer
-    mail_subject = 'Please activate you account'
+    mail_subject = 'Order completed'
     message = render_to_string('orders/order_received_email.html', {
         'user': request.user,
         'order': order,
